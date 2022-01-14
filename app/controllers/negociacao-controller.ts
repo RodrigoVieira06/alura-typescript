@@ -1,9 +1,11 @@
 import { Negociacao } from "../models/negociacao.js";
+import { Negociacoes } from "../models/negociacoes.js";
 
 export class NegociacaoContorller {
     private inputData: HTMLInputElement;
     private inputQuantidade: HTMLInputElement;
     private inputValor: HTMLInputElement;
+    private negociacoes = new Negociacoes();
 
     constructor() {
         this.inputData = document.querySelector('#data');
@@ -13,7 +15,8 @@ export class NegociacaoContorller {
 
     adiciona(): void {
         const negociacao = this.criaNegociacao();
-        console.log(negociacao);
+        this.negociacoes.adiciona(negociacao);
+        console.log(this.negociacoes.lista());
         this.limparFormulario();
     }
 
@@ -28,8 +31,8 @@ export class NegociacaoContorller {
 
     limparFormulario(): void {
         this.inputData.value = '';
-        this.inputQuantidade.value = '';
-        this.inputValor.value = '';
+        this.inputQuantidade.value = '1';
+        this.inputValor.value = '0.0';
         this.inputData.focus();
     }
 }
